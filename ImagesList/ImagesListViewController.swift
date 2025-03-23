@@ -11,24 +11,73 @@ final class ImagesListViewController: UIViewController {
 
     @IBOutlet private var tableView: UITableView!
     
+    private let photosName: [String] = Array(0..<20).map{"\($0)"}
+    
+    private lazy var dateFormatter: DateFormatter = {
+         let formatter = DateFormatter()
+         formatter.locale = Locale(identifier: "ru_RU")
+         formatter.dateStyle = .long // Формат: "25 сентября 2023 г."
+         formatter.timeStyle = .none  // Без времени
+         return formatter
+     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.rowHeight = 200
+        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
 
+    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
+        let currentDate = Date() // Текущая дата
+        let dateString = dateFormatter.string(from: currentDate)
+        cell.dateLabel.text = dateString // Установка даты в лейбл
+        let imageName = photosName[indexPath.row]
+        cell.cellImage.image = UIImage(named: imageName)
+        
+        let likeImage = indexPath.row % 2 == 0 ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
+            cell.likeButton.setImage(likeImage, for: .normal)
+    }
 
 }
 
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let imageName = photosName[indexPath.row]
+        guard let image = UIImage(named: imageName) else {
+            return 200 // Дефолтная высота, если изображение не найдено
+        }
+        
+        // Ширина изображения в ячейке (с учетом отступов таблицы)
+        let imageViewWidth = tableView.bounds.width - tableView.contentInset.left - tableView.contentInset.right
+        
+        // Соотношение сторон изображения
+        let aspectRatio = image.size.width / image.size.height
+        
+        // Высота ImageView
+        let imageViewHeight = imageViewWidth / aspectRatio
+        
+        // Общая высота ячейки = высота ImageView + верхний/нижний отступы ячейки
+        let verticalSpacing: CGFloat = 16 // Пример: 8pt сверху и 8pt снизу
+        return imageViewHeight + verticalSpacing
+    }
 }
+
 
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return photosName.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: ImagesListCell.reuseIdentifier, for: indexPath)
+        guard let imageListCell = cell as? ImagesListCell else {
+            return UITableViewCell()
+        }
+        configCell(for: imageListCell, with: indexPath)
+        return imageListCell
     }
 }
