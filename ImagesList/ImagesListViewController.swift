@@ -13,26 +13,20 @@ final class ImagesListViewController: UIViewController {
     
     private let photosName: [String] = Array(0..<20).map{"\($0)"}
     
-    private lazy var dateFormatter: DateFormatter = {
-         let formatter = DateFormatter()
-         formatter.locale = Locale(identifier: "ru_RU")
-         formatter.dateStyle = .long // Формат: "25 сентября 2023 г."
-         formatter.timeStyle = .none  // Без времени
-         return formatter
-     }()
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.rowHeight = 200
+
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
 
-    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        let currentDate = Date() // Текущая дата
-        let dateString = dateFormatter.string(from: currentDate)
-        cell.dateLabel.text = dateString // Установка даты в лейбл
+   private func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
+        let currentDate = Date()
+       let dateString = DateFormatter.ruLong.string(from: currentDate)
+        cell.dateLabel.text = dateString
         let imageName = photosName[indexPath.row]
         cell.cellImage.image = UIImage(named: imageName)
         
@@ -69,7 +63,7 @@ extension ImagesListViewController: UITableViewDelegate {
 
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return photosName.count
+        photosName.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
