@@ -206,11 +206,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dzy-bI-hDI">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" minimumZoomScale="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="dzy-bI-hDI">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="nkq-vM-nYf">
-                                        <rect key="frame" x="53" y="173" width="326" height="436"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="269" height="308"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -232,16 +232,30 @@
                                     <action selector="didTapBackButton:" destination="AvI-q3-k1a" eventType="touchUpInside" id="R6i-gJ-TE6"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fzf-qU-eXg" userLabel="Share Button">
+                                <rect key="frame" x="171.66666666666666" y="785" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="O4r-lK-W2W"/>
+                                    <constraint firstAttribute="width" constant="50" id="flQ-Pi-akb"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="share_button"/>
+                                <connections>
+                                    <action selector="didTapShareButton:" destination="AvI-q3-k1a" eventType="touchUpInside" id="dkN-Jg-Qds"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fCr-C7-JnZ"/>
                         <color key="backgroundColor" red="0.1019607843" green="0.1058823529" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="dzy-bI-hDI" secondAttribute="bottom" id="6Ef-IY-cBE"/>
+                            <constraint firstItem="fCr-C7-JnZ" firstAttribute="bottom" secondItem="dzy-bI-hDI" secondAttribute="bottom" id="6Ef-IY-cBE"/>
                             <constraint firstItem="fCr-C7-JnZ" firstAttribute="trailing" secondItem="dzy-bI-hDI" secondAttribute="trailing" id="75F-Jz-WbM"/>
                             <constraint firstItem="8qi-Ta-ccc" firstAttribute="leading" secondItem="fCr-C7-JnZ" secondAttribute="leading" constant="8" id="NY5-60-LNa"/>
                             <constraint firstItem="dzy-bI-hDI" firstAttribute="leading" secondItem="fCr-C7-JnZ" secondAttribute="leading" id="WPJ-iy-IzH"/>
                             <constraint firstItem="8qi-Ta-ccc" firstAttribute="top" secondItem="fCr-C7-JnZ" secondAttribute="top" constant="8" id="bVF-Fj-xHb"/>
-                            <constraint firstItem="dzy-bI-hDI" firstAttribute="top" secondItem="OPF-3f-EnF" secondAttribute="top" id="bjD-Ut-izs"/>
+                            <constraint firstItem="dzy-bI-hDI" firstAttribute="top" secondItem="fCr-C7-JnZ" secondAttribute="top" id="bjD-Ut-izs"/>
+                            <constraint firstItem="fCr-C7-JnZ" firstAttribute="bottom" secondItem="Fzf-qU-eXg" secondAttribute="bottom" constant="17" id="hmY-KT-Cc4"/>
+                            <constraint firstItem="Fzf-qU-eXg" firstAttribute="centerX" secondItem="OPF-3f-EnF" secondAttribute="centerX" id="rEo-SJ-joV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9sQ-W2-snO"/>
@@ -262,6 +276,7 @@
         <image name="like_button_on" width="44" height="44"/>
         <image name="logout_button" width="20" height="22"/>
         <image name="nav_back_button_white" width="24" height="24"/>
+        <image name="share_button" width="50.333332061767578" height="50"/>
         <image name="tab_editorial_active" width="30" height="30"/>
         <image name="tab_profile_active" width="75" height="49"/>
     </resources>
