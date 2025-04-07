@@ -248,12 +248,12 @@
                         <viewLayoutGuide key="safeArea" id="fCr-C7-JnZ"/>
                         <color key="backgroundColor" red="0.1019607843" green="0.1058823529" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="fCr-C7-JnZ" firstAttribute="bottom" secondItem="dzy-bI-hDI" secondAttribute="bottom" id="6Ef-IY-cBE"/>
+                            <constraint firstAttribute="bottom" secondItem="dzy-bI-hDI" secondAttribute="bottom" id="6Ef-IY-cBE"/>
                             <constraint firstItem="fCr-C7-JnZ" firstAttribute="trailing" secondItem="dzy-bI-hDI" secondAttribute="trailing" id="75F-Jz-WbM"/>
                             <constraint firstItem="8qi-Ta-ccc" firstAttribute="leading" secondItem="fCr-C7-JnZ" secondAttribute="leading" constant="8" id="NY5-60-LNa"/>
                             <constraint firstItem="dzy-bI-hDI" firstAttribute="leading" secondItem="fCr-C7-JnZ" secondAttribute="leading" id="WPJ-iy-IzH"/>
                             <constraint firstItem="8qi-Ta-ccc" firstAttribute="top" secondItem="fCr-C7-JnZ" secondAttribute="top" constant="8" id="bVF-Fj-xHb"/>
-                            <constraint firstItem="dzy-bI-hDI" firstAttribute="top" secondItem="fCr-C7-JnZ" secondAttribute="top" id="bjD-Ut-izs"/>
+                            <constraint firstItem="dzy-bI-hDI" firstAttribute="top" secondItem="OPF-3f-EnF" secondAttribute="top" id="bjD-Ut-izs"/>
                             <constraint firstItem="fCr-C7-JnZ" firstAttribute="bottom" secondItem="Fzf-qU-eXg" secondAttribute="bottom" constant="17" id="hmY-KT-Cc4"/>
                             <constraint firstItem="Fzf-qU-eXg" firstAttribute="centerX" secondItem="OPF-3f-EnF" secondAttribute="centerX" id="rEo-SJ-joV"/>
                         </constraints>
