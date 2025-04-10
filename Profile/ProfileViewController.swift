@@ -2,11 +2,15 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
+    // MARK: - UI Components
+    
     private let profileImageView = UIImageView()
     private let nameLabel = UILabel()
     private let tagLabel = UILabel()
     private let descriptionLabel = UILabel()
     private let logoutButton = UIButton()
+    
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -14,32 +18,29 @@ final class ProfileViewController: UIViewController {
         setupConstraints()
     }
     
+    // MARK: - Setup
+    
     private func setupViews() {
         profileImageView.image = UIImage(named: "Avatar")
-        profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(profileImageView)
+        configure(profileImageView, addTo: view)
         
         nameLabel.text = "Екатерина Новикова"
         nameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
         nameLabel.textColor = UIColor(hex: "FFFFFF")
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(nameLabel)
+        configure(nameLabel, addTo: view)
         
         tagLabel.text = "@ekaterina_nov"
         tagLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         tagLabel.textColor = UIColor(hex: "AEAFB4")
-        tagLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tagLabel)
+        configure(tagLabel, addTo: view)
         
         descriptionLabel.text = "Hello, world!"
         descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         descriptionLabel.textColor = UIColor(hex: "FFFFFF")
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(descriptionLabel)
+        configure(descriptionLabel, addTo: view)
         
         logoutButton.setImage(UIImage(named: "logout_button"), for: .normal)
-        logoutButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(logoutButton)
+        configure(logoutButton, addTo: view)
     }
     
     private func setupConstraints() {
@@ -65,9 +66,17 @@ final class ProfileViewController: UIViewController {
         ])
     }
     
+    // MARK: - Actions
+    
     @objc private func didTapLogoutButton() {
-        
         print("Logout button tapped")
+    }
+    
+    // MARK: - Helpers
+    
+    private func configure(_ view: UIView, addTo parent: UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        parent.addSubview(view)
     }
 }
 
