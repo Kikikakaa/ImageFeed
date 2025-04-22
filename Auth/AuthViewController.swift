@@ -5,6 +5,7 @@ protocol AuthViewControllerDelegate: AnyObject {
 }
 
 final class AuthViewController: UIViewController {
+    weak var delegate: AuthViewControllerDelegate? 
     private let showWebViewSegueIdentifier = "ShowWebView"
     
     override func viewDidLoad() {

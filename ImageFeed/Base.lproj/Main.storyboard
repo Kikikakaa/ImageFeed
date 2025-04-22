@@ -23,7 +23,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iZi-P3-SGa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="123" y="-715"/>
+            <point key="canvasLocation" x="335" y="-694"/>
         </scene>
         <!--Auth View Controller-->
         <scene sceneID="wXz-uG-WVh">
@@ -128,12 +128,21 @@
         <!--Splash View Controller-->
         <scene sceneID="6Jh-HK-Aq4">
             <objects>
-                <viewController id="8HU-rr-0An" customClass="SplashViewController" sceneMemberID="viewController">
+                <viewController id="8HU-rr-0An" customClass="SplashViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uzi-L2-rV3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vector" translatesAutoresizingMaskIntoConstraints="NO" id="TN9-k5-u5y">
+                                <rect key="frame" x="159" y="387" width="75" height="78"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="USn-kb-UIc"/>
                         <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="TN9-k5-u5y" firstAttribute="centerX" secondItem="uzi-L2-rV3" secondAttribute="centerX" id="8n6-Xp-Rk7"/>
+                            <constraint firstItem="TN9-k5-u5y" firstAttribute="centerY" secondItem="uzi-L2-rV3" secondAttribute="centerY" id="pRI-GM-3Wz"/>
+                        </constraints>
                     </view>
                     <connections>
                         <segue destination="46k-yY-cBy" kind="show" identifier="ShowAuthenticationScreen" id="Ktc-pe-okm"/>
@@ -350,6 +359,7 @@
     <resources>
         <image name="0" width="1600" height="1059"/>
         <image name="Cell Image" width="128" height="128"/>
+        <image name="Vector" width="75" height="78"/>
         <image name="auth_screen_logo" width="60" height="60"/>
         <image name="like_button_on" width="44" height="44"/>
         <image name="nav_back_button_white" width="24" height="24"/>
