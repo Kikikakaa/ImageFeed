@@ -12,6 +12,8 @@ final class AuthViewController: UIViewController {
         super.viewDidLoad()
         
         configureBackButton()
+        self.isModalInPresentation = true
+    
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -46,7 +48,7 @@ extension AuthViewController: WebViewViewControllerDelegate {
                 // Закрытие WebView и переход
                 DispatchQueue.main.async {
                     vc.dismiss(animated: true) {
-                        self.performSegue(withIdentifier: "ShowMainApp", sender: nil)
+                        self.switchToTabBarController() 
                     }
                 }
             case .failure(let error):
