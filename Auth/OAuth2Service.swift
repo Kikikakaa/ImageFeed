@@ -26,25 +26,29 @@ final class OAuth2Service {
         do {
             let request = try makeOAuthTokenRequest(code: code)
             let task = URLSession.shared.data(for: request) { result in
-                switch result {
-                case .success(let data):
-                    do {
-                        let decoder = JSONDecoder()
-                        let tokenResponse = try decoder.decode(OAuthTokenResponse.self, from: data)
-                        completion(.success(tokenResponse.accessToken))
-                    } catch {
-                        print("Decoding Error: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let data):
+                        do {
+                            let decoder = JSONDecoder()
+                            let tokenResponse = try decoder.decode(OAuthTokenResponse.self, from: data)
+                            completion(.success(tokenResponse.accessToken))
+                        } catch {
+                            print("Decoding Error: \(error.localizedDescription)")
+                            completion(.failure(error))
+                        }
+                    case .failure(let error):
+                        print("Network or HTTP Error: \(error.localizedDescription)")
                         completion(.failure(error))
                     }
-                case .failure(let error):
-                    print("Network or HTTP Error: \(error.localizedDescription)")
-                    completion(.failure(error))
                 }
             }
             task.resume()
         } catch {
-            print("Ошибка: \(error)")
-            completion(.failure(error))
+            DispatchQueue.main.async {
+                print("Ошибка: \(error)")
+                completion(.failure(error))
+            }
         }
     }
 }

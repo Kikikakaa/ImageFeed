@@ -21,7 +21,7 @@ final class AuthViewController: UIViewController {
             guard
                 let webViewViewController = segue.destination as? WebViewViewController
             else {
-                assertionFailure("Failed to prepare for \(showWebViewSegueIdentifier)")
+                print("Error: Failed to prepare for \(showWebViewSegueIdentifier). Unexpected destination type.")
                 return
             }
             webViewViewController.delegate = self
