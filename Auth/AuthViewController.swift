@@ -41,14 +41,14 @@ final class AuthViewController: UIViewController {
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        ProgressHUD.animate()
+        UIBlockingProgressHUD.show()
         OAuth2Service.shared.fetchOAuthToken(code: code) { result in
-            ProgressHUD.animate()
+            UIBlockingProgressHUD.dismiss()
             switch result {
             case .success(let token):
-                // Сохранение токена
+                print("[Auth] Успешная аутентификация. Токен: \(token)")
                 OAuth2TokenStorage.shared.token = token
-                // Закрытие WebView и переход
+                print("[Auth] Токен сохранен: \(OAuth2TokenStorage.shared.token ?? "nil")")
                 DispatchQueue.main.async {
                     vc.dismiss(animated: true) {
                         self.switchToTabBarController() 

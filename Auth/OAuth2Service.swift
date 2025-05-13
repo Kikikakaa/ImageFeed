@@ -1,7 +1,15 @@
 import Foundation
 
+enum AuthServiceError: Error {
+    case invalidRequest
+}
+
 final class OAuth2Service {
     static let shared = OAuth2Service()
+    
+    private var task: URLSessionTask?
+    private var lastCode: String?
+    
     private init() {}
     
     func makeOAuthTokenRequest(code: String) throws -> URLRequest {
@@ -23,30 +31,37 @@ final class OAuth2Service {
      }
     
     func fetchOAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        assert(Thread.isMainThread)
+        guard lastCode != code else {
+            print("[OAuth2Service|fetchAuthToken]:  Код не совпадает")
+            completion(.failure(AuthServiceError.invalidRequest))
+            return
+         }
+
+         task?.cancel()
+         lastCode = code
+        
         do {
             let request = try makeOAuthTokenRequest(code: code)
-            let task = URLSession.shared.data(for: request) { result in
+            let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result <OAuthTokenResponse, Error>) in
                 DispatchQueue.main.async {
                     switch result {
-                    case .success(let data):
-                        do {
-                            let decoder = JSONDecoder()
-                            let tokenResponse = try decoder.decode(OAuthTokenResponse.self, from: data)
+                    case .success(let tokenResponse):
                             completion(.success(tokenResponse.accessToken))
-                        } catch {
-                            print("Decoding Error: \(error.localizedDescription)")
-                            completion(.failure(error))
-                        }
                     case .failure(let error):
-                        print("Network or HTTP Error: \(error.localizedDescription)")
+                        print("[OAuth2Service|fetchAuthToken]: Network or HTTP Error -  \(error.localizedDescription)")
                         completion(.failure(error))
                     }
+                    self?.task = nil
+                    self?.lastCode = nil
                 }
             }
+            self.task = task
             task.resume()
         } catch {
             DispatchQueue.main.async {
-                print("Ошибка: \(error)")
+                print("[OAuth2Service|fetchAuthToken]: Ошибка - \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }
