@@ -30,6 +30,7 @@
 		CE755B632DD3AF1700D24D77 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = CE755B622DD3AF1700D24D77 /* SwiftKeychainWrapper */; };
 		CE755B652DD3CED700D24D77 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE755B642DD3CEBF00D24D77 /* TabBarController.swift */; };
 		CE85AC1A2DB4326200C9DFEB /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85AC192DB4324300C9DFEB /* OAuth2Service.swift */; };
+		CEA379522DD4C76100FBF8B0 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEA379512DD4C76100FBF8B0 /* WebKit.framework */; };
 		CECF79512DD2578900D42163 /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECF79502DD2577E00D42163 /* ProfileImageService.swift */; };
 		CEF559E02DAC4C1F00F32CC9 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF559DF2DAC4C1F00F32CC9 /* AuthViewController.swift */; };
 		CEF559E22DAC4FD800F32CC9 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF559E12DAC4FD800F32CC9 /* WebViewViewController.swift */; };
@@ -59,6 +60,7 @@
 		CE72A8322D72141E00BC7E42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE755B642DD3CEBF00D24D77 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		CE85AC192DB4324300C9DFEB /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
+		CEA379512DD4C76100FBF8B0 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		CECF79502DD2577E00D42163 /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
 		CEF559DF2DAC4C1F00F32CC9 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		CEF559E12DAC4FD800F32CC9 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			files = (
 				CE755B602DD38EEA00D24D77 /* Kingfisher in Frameworks */,
 				CE68025F2DC4C1AD007DF527 /* ProgressHUD in Frameworks */,
+				CEA379522DD4C76100FBF8B0 /* WebKit.framework in Frameworks */,
 				CE755B632DD3AF1700D24D77 /* SwiftKeychainWrapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,6 +152,7 @@
 				CE1CBD0D2D7DEDFD00610370 /* ImagesList */,
 				CE5B3E1A2DA1859F00776CB9 /* SingleImageView */,
 				CE72A8232D72141A00BC7E42 /* ImageFeed */,
+				CEA379502DD4C76100FBF8B0 /* Frameworks */,
 				CE72A8222D72141A00BC7E42 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -174,6 +178,14 @@
 				CE72A8322D72141E00BC7E42 /* Info.plist */,
 			);
 			path = ImageFeed;
+			sourceTree = "<group>";
+		};
+		CEA379502DD4C76100FBF8B0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CEA379512DD4C76100FBF8B0 /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		CEF559DE2DAC4BD200F32CC9 /* Auth */ = {

@@ -38,53 +38,53 @@ final class ProfileImageService {
     }
     
     func fetchProfileImageURL(username: String, completion: @escaping (Result<String, Error>) -> Void) {
-       currentTask?.cancel()
-       print("[ProfileImageService|fetchProfile]: Отправка запроса для картинки")
-       
-       guard let token = OAuth2TokenStorage().token else {
-           print("[ProfileImageService|fetchProfileImageURL]: Токен не получен")
-           DispatchQueue.main.async {
-               completion(.failure(ProfileNetworkError.missingToken))
-           }
-           return
-       }
-       
-       guard let url = URL(string: "https://api.unsplash.com/users/\(username)") else {
-           print("[ProfileImageService|fetchProfileImageURL]: Невозможно создать URL")
-           completion(.failure(ProfileNetworkError.urlSessionError))
-           return
-       }
-       
-       print("[ProfileImageService|fetchProfileImageURL]: URL успешно создан: \(url)")
-       
-       var request = URLRequest(url: url)
-       request.httpMethod = "GET"
-       request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-       
+        currentTask?.cancel()
+        print("[ProfileImageService|fetchProfile]: Отправка запроса для картинки")
+        
+        guard let token = OAuth2TokenStorage.shared.token else {
+            print("[ProfileImageService|fetchProfileImageURL]: Токен не получен")
+            DispatchQueue.main.async {
+                completion(.failure(ProfileNetworkError.missingToken))
+            }
+            return
+        }
+        
+        guard let url = URL(string: "https://api.unsplash.com/users/\(username)") else {
+            print("[ProfileImageService|fetchProfileImageURL]: Невозможно создать URL")
+            completion(.failure(ProfileNetworkError.urlSessionError))
+            return
+        }
+        
+        print("[ProfileImageService|fetchProfileImageURL]: URL успешно создан: \(url)")
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
         let task = URLSession.shared.objectTask(for: request) { [weak self] (result: Result<UserResult, Error>) in
-           switch result {
-           case .success(let userResult):
-                   print("[ProfileImageService|fetchProfileImageURL]: Успешный ответ: \(userResult)")
-                   let avatarURL = userResult.profileImage.small
-                   DispatchQueue.main.async {
-                       self?.avatarURL = avatarURL  // Обновление avatarURL
-                       completion(.success(avatarURL))
-                       NotificationCenter.default.post(
+            switch result {
+            case .success(let userResult):
+                print("[ProfileImageService|fetchProfileImageURL]: Успешный ответ: \(userResult)")
+                let avatarURL = userResult.profileImage.small
+                DispatchQueue.main.async {
+                    self?.avatarURL = avatarURL  // Обновление avatarURL
+                    completion(.success(avatarURL))
+                    NotificationCenter.default.post(
                         name: ProfileImageService.didChangeNotification,
                         object: self,
                         userInfo: ["URL": avatarURL]
-                       )
-                   }
-           case .failure(let error):
-               print("[ProfileImageService|fetchProfileImageURL]: Ошибка запроса: \(error.localizedDescription)")
-               DispatchQueue.main.async {
-                   completion(.failure(error))
-               }
-           }
-       }
-       
-       self.currentTask = task
-       task.resume()
-   }
+                    )
+                }
+            case .failure(let error):
+                print("[ProfileImageService|fetchProfileImageURL]: Ошибка запроса: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+        }
+        
+        self.currentTask = task
+        task.resume()
+    }
     
 }

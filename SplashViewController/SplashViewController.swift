@@ -21,7 +21,7 @@ final class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "ypBlack")
+        view.backgroundColor = UIColor(resource: .ypBlack)
         view.addSubview(logoImageView)
         
         NSLayoutConstraint.activate([
@@ -91,19 +91,19 @@ extension SplashViewController: AuthViewControllerDelegate {
             switch result {
             case .success(let profile):
                 ProfileService.shared.updateProfile(profile)
-                ProfileImageService.shared.fetchProfileImageURL(username: profile.username) { imageResult in
+                ProfileImageService.shared.fetchProfileImageURL(username: profile.username) { [weak self] imageResult in
                     print("🔄 [Splash] Получен ответ от fetchProfileImageURL")
                     switch imageResult {
                     case .success(let avatarURL):
                         ProfileImageService.shared.updateAvatarURL(avatarURL)
                         print("Аватарка загружена: \(avatarURL)")
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            self.switchToTabBarController()
+                            self?.switchToTabBarController()
                         }
                     case .failure(let error):
                         print("Ошибка загрузки аватарки: \(error.localizedDescription)")
                         DispatchQueue.main.async {
-                            self.switchToTabBarController()
+                            self?.switchToTabBarController()
                         }
                     }
                 }

@@ -35,23 +35,39 @@ final class AuthViewController: UIViewController {
         navigationController?.navigationBar.backIndicatorImage = UIImage(named: "nav_back_button")
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "nav_back_button")
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem?.tintColor = UIColor(named: "ypBlack")
+        navigationItem.backBarButtonItem?.tintColor = UIColor(resource: .ypBlack)
     }
 }
 
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         UIBlockingProgressHUD.show()
-        OAuth2Service.shared.fetchOAuthToken(code: code) { result in
+        OAuth2Service.shared.fetchOAuthToken(code: code) { [weak self] result in
             UIBlockingProgressHUD.dismiss()
             switch result {
             case .success(let token):
                 print("[Auth] Успешная аутентификация. Токен: \(token)")
                 OAuth2TokenStorage.shared.token = token
                 print("[Auth] Токен сохранен: \(OAuth2TokenStorage.shared.token ?? "nil")")
-                DispatchQueue.main.async {
-                    vc.dismiss(animated: true) {
-                        self.switchToTabBarController() 
+                // Загружаем профиль
+                ProfileService.shared.fetchProfileInfo(token: token) { [weak self] result in
+                    switch result {
+                    case .success(let profile):
+                        // Загружаем аватарку и переходим
+                        ProfileImageService.shared.fetchProfileImageURL(username: profile.username) { [weak self] _ in
+                            DispatchQueue.main.async {
+                                vc.dismiss(animated: true) {
+                                    self?.switchToTabBarController()
+                                }
+                            }
+                        }
+                    case .failure(let error):
+                        print("[AuthViewController]: Ошибка загрузки аватарки - \(error.localizedDescription)")
+                        DispatchQueue.main.async {
+                            vc.dismiss(animated: true) {
+                                self?.switchToTabBarController()
+                            }
+                        }
                     }
                 }
             case .failure(let error):

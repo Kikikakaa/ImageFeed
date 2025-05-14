@@ -42,21 +42,21 @@ final class ProfileService {
     static var shared = ProfileService()
     private init() {}
     private(set) var profile: Profile? {
-         didSet {
-             NotificationCenter.default.post(
-                 name: ProfileService.didChangeNotification,
-                 object: self
-             )
-         }
-     }
+        didSet {
+            NotificationCenter.default.post(
+                name: ProfileService.didChangeNotification,
+                object: self
+            )
+        }
+    }
     static let didChangeNotification = Notification.Name("ProfileServiceDidChange")
     
     func updateProfile(_ profile: Profile) {
         self.profile = profile
     }
-
+    
     private func createAuthRequest(url: URL, token: String) -> URLRequest? {
-
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -64,34 +64,34 @@ final class ProfileService {
         return request
     }
     
- func fetchProfileInfo(token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
-     
-     print("[ProfileService] Запуск запроса профиля...")
+    func fetchProfileInfo(token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
+        
+        print("[ProfileService] Запуск запроса профиля...")
         currentTask?.cancel()
-     
+        
         guard let url = URL(string: "https://api.unsplash.com/me") else {
             print("Incorrect URL")
             completion(.failure(ProfileNetworkError.urlSessionError))
             return
         }
-     print("[ProfileService] URL создан: \(url.absoluteString)")
-     
+        print("[ProfileService] URL создан: \(url.absoluteString)")
+        
         guard let request = createAuthRequest(url: url, token: token) else {
             print("URLRequest error")
             completion(.failure(ProfileNetworkError.requestCancelled))
             return
         }
         
-     let task = URLSession.shared.objectTask(for: request) { [weak self]
-         (result: Result<ProfileResult, Error>) in
-     switch result {
+        let task = URLSession.shared.objectTask(for: request) { [weak self]
+            (result: Result<ProfileResult, Error>) in
+            switch result {
             case .success(let profileResult):
                 let profile = Profile(profileResult: profileResult)
                 self?.profile = profile
                 print("Профиль сохранен: \(profile)")
                 completion(.success(profile))
             case .failure(let error):
-            print("[ProfileService|fetchProfileInfo]: Ошибка - \(error.localizedDescription)")
+                print("[ProfileService|fetchProfileInfo]: Ошибка - \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }

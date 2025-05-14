@@ -24,7 +24,7 @@ final class ProfileViewController: UIViewController {
         setupConstraints()
         
         profileImageView.clipsToBounds = true
-        view.backgroundColor = UIColor(named: "ypBlack")
+        view.backgroundColor = UIColor(resource: .ypBlack)
         
         profileObserver = NotificationCenter.default.addObserver(
             forName: ProfileService.didChangeNotification,
@@ -160,7 +160,7 @@ final class ProfileViewController: UIViewController {
                 .transition(.fade(0.3))
             ]) { result in
                 switch result {
-                case .success(let value):
+                case .success:
                     print("[ProfileViewController|updateAvatar]: Аватарка успешно загружена с URL")
                 case .failure(let error):
                     print("[ProfileViewController|updateAvatar]: Ошибка при загрузке аватарки: \(error.localizedDescription)")
