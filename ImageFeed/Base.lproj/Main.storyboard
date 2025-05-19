@@ -166,7 +166,10 @@
                                                         <constraint firstAttribute="height" constant="44" id="sFZ-lm-tnQ"/>
                                                     </constraints>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="like_button_on"/>
+                                                    <state key="normal" image="like_button_off"/>
+                                                    <connections>
+                                                        <action selector="likeButtonClicked" destination="ztv-U1-4Hz" eventType="touchUpInside" id="1BA-Fz-t8h"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -310,7 +313,7 @@
         <image name="0" width="1600" height="1059"/>
         <image name="Cell Image" width="128" height="128"/>
         <image name="auth_screen_logo" width="60" height="60"/>
-        <image name="like_button_on" width="44" height="44"/>
+        <image name="like_button_off" width="44" height="44"/>
         <image name="nav_back_button_white" width="24" height="24"/>
         <image name="share_button" width="50.333332061767578" height="50"/>
         <image name="tab_editorial_active" width="30" height="30"/>

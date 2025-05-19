@@ -10,6 +10,8 @@
 		CE1CBD0C2D7DED8400610370 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CBD0B2D7DED8400610370 /* ImagesListCell.swift */; };
 		CE31F7252DA835F800505767 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31F7242DA835F800505767 /* Constants.swift */; };
 		CE49C2142DCCC7C900046F5C /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49C2132DCCC7B900046F5C /* UIBlockingProgressHUD.swift */; };
+		CE4DB31B2DD90CC7002E0887 /* ProfileLogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4DB31A2DD90CBE002E0887 /* ProfileLogoutService.swift */; };
+		CE4DE8942DD639B100491384 /* ImagesListCellDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4DE8932DD6399E00491384 /* ImagesListCellDelegateProtocol.swift */; };
 		CE4F52A12D9C858C0083E1D0 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F52A02D9C858C0083E1D0 /* DateFormatter+Extension.swift */; };
 		CE502D2C2DA6D160009D10AE /* UIColors+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE502D2B2DA6D160009D10AE /* UIColors+Extension.swift */; };
 		CE5471062DCE934D006F1682 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5471052DCE933C006F1682 /* ProfileService.swift */; };
@@ -42,6 +44,8 @@
 		CE1CBD0B2D7DED8400610370 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		CE31F7242DA835F800505767 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE49C2132DCCC7B900046F5C /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
+		CE4DB31A2DD90CBE002E0887 /* ProfileLogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLogoutService.swift; sourceTree = "<group>"; };
+		CE4DE8932DD6399E00491384 /* ImagesListCellDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCellDelegateProtocol.swift; sourceTree = "<group>"; };
 		CE4F52A02D9C858C0083E1D0 /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		CE502D2B2DA6D160009D10AE /* UIColors+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColors+Extension.swift"; sourceTree = "<group>"; };
 		CE5471052DCE933C006F1682 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 		CE1CBD0D2D7DEDFD00610370 /* ImagesList */ = {
 			isa = PBXGroup;
 			children = (
+				CE4DE8932DD6399E00491384 /* ImagesListCellDelegateProtocol.swift */,
 				CEA379532DD4E44B00FBF8B0 /* ImagesListService.swift */,
 				CE72A8282D72141A00BC7E42 /* ImagesListViewController.swift */,
 				CE1CBD0B2D7DED8400610370 /* ImagesListCell.swift */,
@@ -207,6 +212,7 @@
 		CEF8EC212D9D662900F079D3 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				CE4DB31A2DD90CBE002E0887 /* ProfileLogoutService.swift */,
 				CECF79502DD2577E00D42163 /* ProfileImageService.swift */,
 				CE5471052DCE933C006F1682 /* ProfileService.swift */,
 				CEF8EC1F2D9D62C500F079D3 /* ProfileViewController.swift */,
@@ -305,12 +311,14 @@
 				CEA379542DD4E45700FBF8B0 /* ImagesListService.swift in Sources */,
 				CE1CBD0C2D7DED8400610370 /* ImagesListCell.swift in Sources */,
 				CEF559E22DAC4FD800F32CC9 /* WebViewViewController.swift in Sources */,
+				CE4DE8942DD639B100491384 /* ImagesListCellDelegateProtocol.swift in Sources */,
 				CE502D2C2DA6D160009D10AE /* UIColors+Extension.swift in Sources */,
 				CE5FCEA22DB54E5F009FC743 /* OAuthTokenResponse.swift in Sources */,
 				CE5B3E192D9EEE9400776CB9 /* SingleImageViewController.swift in Sources */,
 				CE72A8252D72141A00BC7E42 /* AppDelegate.swift in Sources */,
 				CE4F52A12D9C858C0083E1D0 /* DateFormatter+Extension.swift in Sources */,
 				CE5471062DCE934D006F1682 /* ProfileService.swift in Sources */,
+				CE4DB31B2DD90CC7002E0887 /* ProfileLogoutService.swift in Sources */,
 				CE72A8272D72141A00BC7E42 /* SceneDelegate.swift in Sources */,
 				CE31F7252DA835F800505767 /* Constants.swift in Sources */,
 				CECF79512DD2578900D42163 /* ProfileImageService.swift in Sources */,

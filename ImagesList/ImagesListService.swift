@@ -7,7 +7,8 @@ struct Photo {
     let welcomeDescription: String?
     let thumbImageURL: String
     let largeImageURL: String
-    let isLiked: Bool
+    let fullImageURL: String
+    var isLiked: Bool
 }
 
 struct PhotoResult: Decodable {
@@ -102,6 +103,7 @@ final class ImagesListService {
                           welcomeDescription: $0.description,
                           thumbImageURL: $0.urls.thumb,
                           largeImageURL: $0.urls.regular,
+                          fullImageURL: $0.urls.full,
                           isLiked: $0.isLiked
                     )
                 }
@@ -127,5 +129,58 @@ final class ImagesListService {
         
         self.currentTask = currentTask
         currentTask.resume()
+    }
+    
+    func clearPhotos() {
+        photos.removeAll()
+        lastLoadedPage = 0
+        NotificationCenter.default.post(name: ImagesListService.didChangeNotification, object: self)
+        print("Фото и данные страниц удалены")
+    }
+    
+    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let authToken else {
+            print("Нет токена авторизации")
+            completion(.failure(NSError(domain: "No Token", code: 401, userInfo: nil)))
+            return
+        }
+        
+        guard let url = URL(string: "https://api.unsplash.com/photos/\(photoId)/like") else {
+            completion(.failure(NSError(domain: "Invalid Url", code: 400, userInfo: nil)))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = isLike ? "POST" : "DELETE"
+        
+        request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
+        
+        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                print("Ошибка получения лайка: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+                return
+            }
+            
+            guard let index = self.photos.firstIndex(where: { $0.id == photoId }) else {
+                DispatchQueue.main.async {
+                    completion(.failure(NSError(domain: "Photo Not Found", code: 404, userInfo: nil)))
+                }
+                return
+            }
+            
+            self.photos[index].isLiked.toggle()
+            
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: ImagesListService.didChangeNotification, object: self)
+                completion(.success(()))
+            }
+        }
+        
+        task.resume()
     }
 }

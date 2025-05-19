@@ -59,6 +59,27 @@ final class ProfileViewController: UIViewController {
         updateAvatar()
     }
     
+    @objc
+    private func didTapButton() {
+        showLogoutAlert()
+    }
+    
+    private func showLogoutAlert() {
+        let alert = UIAlertController(title: "Пока, пока!", message: "Уверены, что хотите выйти?", preferredStyle: .alert)
+        
+        let yesAction = UIAlertAction(title: "Да", style: .default) { _ in
+            ProfileLogoutService.shared.logout()
+            UIApplication.shared.windows.first?.rootViewController = SplashViewController()
+        }
+        
+        let noAction = UIAlertAction(title: "Нет", style: .cancel)
+        
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        
+        present(alert, animated: true)
+    }
+    
     // MARK: - Setup
     
     private func setupViews() {
@@ -82,6 +103,8 @@ final class ProfileViewController: UIViewController {
         
         logoutButton.setImage(UIImage(named: "logout_button"), for: .normal)
         configure(logoutButton, addTo: view)
+        
+        logoutButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
     }
     
     private func setupConstraints() {

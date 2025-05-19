@@ -98,6 +98,12 @@ final class ProfileService {
         self.currentTask = task
         task.resume()
     }
+    
+    func clearProfile() {
+        profile = nil
+        NotificationCenter.default.post(name: ProfileService.didChangeNotification, object: self)
+        print("Профиль удален")
+    }
 }
 
     
