@@ -13,8 +13,8 @@ final class ImagesListCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-            cellImage.kf.cancelDownloadTask()
-            cellImage.image = nil
+        cellImage.kf.cancelDownloadTask()
+        cellImage.image = nil
     }
     
     @IBAction private func likeButtonClicked() {
@@ -36,7 +36,7 @@ final class ImagesListCell: UITableViewCell {
     
     func setIsLiked(_ isLiked: Bool) {
         let likeImage = isLiked ? UIImage(resource: .likeButtonOn) : UIImage(resource: .likeButtonOff)
-          likeButton.setImage(likeImage, for: .normal)
-      }
+        likeButton.setImage(likeImage, for: .normal)
+    }
 }
 

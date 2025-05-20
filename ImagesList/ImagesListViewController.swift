@@ -102,6 +102,7 @@ extension ImagesListViewController: UITableViewDataSource {
         let photo = photos[indexPath.row]
         cell.configure(with: photo)
         cell.delegate = self
+        cell.setIsLiked(photo.isLiked)
         return cell
     }
 }
@@ -112,9 +113,9 @@ extension ImagesListViewController: ImagesListCellDelegate {
         
         UIBlockingProgressHUD.show()
         imagesListService.changeLike(photoId: photo.id, isLike: !photo.isLiked) { [weak self] result in
-            guard let self = self else { return }
             DispatchQueue.main.async {
                 UIBlockingProgressHUD.dismiss()
+                guard let self = self else { return }
                 switch result {
                 case .success:
                     self.photos[indexPath.row] = self.imagesListService.photos.first { $0.id == photo.id } ?? photo
