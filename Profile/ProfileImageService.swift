@@ -16,7 +16,7 @@ final class ProfileImageService {
     static let shared = ProfileImageService()
     private init() {}
     
-    private(set) var avatarURL: String? {
+    var avatarURL: String? {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }

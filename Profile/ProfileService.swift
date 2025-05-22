@@ -41,7 +41,7 @@ final class ProfileService {
     private var currentTask: URLSessionTask?
     static var shared = ProfileService()
     private init() {}
-    private(set) var profile: Profile? {
+    var profile: Profile? {
         didSet {
             NotificationCenter.default.post(
                 name: ProfileService.didChangeNotification,
