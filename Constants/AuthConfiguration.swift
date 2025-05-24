@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 enum Constants {
     static let accessKey = "RBBG6QyNGW8SAbj5PY3AzEWLwtYeMdv_5VLG7KY1wh8"
@@ -34,7 +34,7 @@ struct AuthConfiguration {
     }
     
     static var standard: AuthConfiguration {
-        return AuthConfiguration(accessKey: Constants.accessKey,
+        AuthConfiguration(accessKey: Constants.accessKey,
                                  secretKey: Constants.secretKey,
                                  redirectURI: Constants.redirectURI,
                                  accessScope: Constants.accessScope,

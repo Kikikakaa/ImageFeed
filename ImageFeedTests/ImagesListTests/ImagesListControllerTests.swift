@@ -1,7 +1,7 @@
 import XCTest
 @testable import ImageFeed
 
-class ImagesListViewControllerTests: XCTestCase {
+final class ImagesListViewControllerTests: XCTestCase {
     var sut: ImagesListViewController!
     var presenterSpy: ImagesListPresenterSpy!
     
